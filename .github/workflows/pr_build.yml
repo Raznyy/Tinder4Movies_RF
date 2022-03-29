@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: node & npm init 
         run: |
-          nvm use
           npm ci
+          nvm use
       - name: test & linter
         run: |
           npm run test

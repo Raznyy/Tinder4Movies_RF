@@ -4,4 +4,5 @@ export type Movie = {
     title: string;
     summary: string;
     rating: number;
+    action?: string;
 }

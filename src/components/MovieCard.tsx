@@ -12,9 +12,13 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 type MovieCardProps = {
-    movieItem: Movie;
-}
-export default function MovieCard({movieItem}: MovieCardProps) {
+  movieItem: Movie;
+};
+export default function MovieCard({ movieItem }: MovieCardProps) {
+  function clickHandler(action: string) {
+    console.log({ action });
+  }
+
   return (
     <Card className={`movie-card`}>
       <CardHeader
@@ -43,10 +47,20 @@ export default function MovieCard({movieItem}: MovieCardProps) {
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button variant="contained" color="success" startIcon={<CheckCircleRoundedIcon />}>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<CheckCircleRoundedIcon />}
+          onClick={() => clickHandler('accept')}
+        >
           Accept
         </Button>
-        <Button variant="contained" color="error" endIcon={<CancelRoundedIcon />}>
+        <Button
+          variant="contained"
+          color="error"
+          endIcon={<CancelRoundedIcon />}
+          onClick={() => clickHandler('reject')}
+        >
           Reject
         </Button>
       </CardActions>

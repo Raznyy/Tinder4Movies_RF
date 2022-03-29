@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Movie } from './types';
 import MovieCard from './components/MovieCard';
 import './App.css';
 
 function App() {
+  const [movies, setMovies] = useState<Movie[]>([]);
+
   const sampleMovie: Movie = {
     id: '1and3011',
     imageURL:

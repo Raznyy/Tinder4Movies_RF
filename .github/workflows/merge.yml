@@ -1,4 +1,4 @@
-name: Build and Test Tinder 4 Movies App
+name: Push to GitHub pages on merge
 
 on:
   push:

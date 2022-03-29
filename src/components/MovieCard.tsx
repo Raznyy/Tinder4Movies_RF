@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SwipeEventData, useSwipeable } from 'react-swipeable';
 import { AnimateOptions, Movie } from '../types';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -35,8 +36,24 @@ export default function MovieCard({
     }, 700);
   }
 
+  const swipeHandlers = useSwipeable({
+    onSwiped: (eventData) => handleSwipe(eventData)
+  });
+
+  function handleSwipe(eventData: SwipeEventData) {
+    switch(eventData.dir){
+      case("Left"):
+        clickHandler("accept")
+        break;
+      case("Right"):
+        clickHandler("reject")
+        break;
+    }
+  }
+
   return (
     <Card
+      {...swipeHandlers}
       className={`movie-card ${animate.animate ? `movie-card--animate-${animate.type}` : ''}`}
       sx={{ transform: `rotate(${rotation}deg)`, zIndex: `${position}` }}
     >

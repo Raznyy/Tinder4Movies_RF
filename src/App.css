@@ -7,7 +7,7 @@
     padding: 40px;
 }
 
-.App {
+.movie-list {
     display: flex;
     justify-content: center;
     position: relative;

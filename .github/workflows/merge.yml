@@ -1,4 +1,4 @@
-name: Build production app
+name: Build and Test Tinder 4 Movies App
 
 on:
   push:
@@ -19,9 +19,21 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: node & npm init 
+        run: npm ci
+          
+      - name: test & linter
         run: |
-          npm ci
-      - name: build & deploy to GitHub Pages
-        run: |
-          npm run deploy
+          CI=true npm run test
+          npm run lint
+
+      - name: build
+        run: npm run build
+        
+      - name: deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
+          

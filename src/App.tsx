@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Movie } from './types';
+import { Movie, SnackBarOptions } from './types';
 import MovieCard from './components/MovieCard';
 import './App.css';
+import NotificationSnackBar from './components/NotificationSnackBar';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [snackBarOptions, setSnackBarOptions] = useState<SnackBarOptions>({
+    open: false,
+    action: '',
+  });
   // Mocking the API with json-server
   const mockedURL = 'http://localhost:3004/movies';
 
@@ -12,14 +17,16 @@ function App() {
   function updateMovies(id: string, action: string) {
     setMovies((prevArray) => prevArray.filter((movie) => movie.id !== id));
     sendEventToAPI(id, action);
+    setSnackBarOptions({ open: true, action });
   }
 
-  const generateRequestBody = (id: string) => movies.find(movie => movie.id === id);
+  const generateRequestBody = (id: string) =>
+    movies.find((movie) => movie.id === id);
 
   // Send PUT request to API to update data
   async function sendEventToAPI(id: string, action: string) {
     const requestURL = `${mockedURL}/recommendations/${id}/${action}`;
-    const requestBody = {...generateRequestBody(id), action};
+    const requestBody = { ...generateRequestBody(id), action };
     await fetch(requestURL, {
       method: 'PUT',
       body: JSON.stringify(requestBody),
@@ -61,6 +68,7 @@ function App() {
             />
           );
         })}
+      <NotificationSnackBar snackBarOptions={snackBarOptions} />
     </div>
   );
 }

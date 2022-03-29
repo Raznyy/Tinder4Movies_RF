@@ -6,3 +6,8 @@ export type Movie = {
     rating: number;
     action?: string;
 }
+
+export type SnackBarOptions = {
+    open: boolean;
+    action: string;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 import NotificationSnackBar from './components/NotificationSnackBar';
 import MovieCard from './components/MovieCard';
@@ -16,7 +16,7 @@ afterEach(() => {
   container = null;
 });
 
-describe("MovieCard", function() {
+describe('MovieCard', function () {
   const fakeMovie = {
     id: '1234',
     imageURL:
@@ -25,7 +25,7 @@ describe("MovieCard", function() {
     summary: 'Nullam nunc neque, viverra ut malesuada eu, placerat non lectus.',
     rating: 1.5,
   };
-  
+
   it('Render MovieCard properly', () => {
     render(
       <MovieCard
@@ -37,19 +37,19 @@ describe("MovieCard", function() {
       />,
       container
     );
-  
+
     const movieTitle = screen.getByText(fakeMovie.title);
     expect(movieTitle).toBeInTheDocument();
     const movieSummary = screen.getByText(fakeMovie.summary);
     expect(movieSummary).toBeInTheDocument();
     const movieRaiting = screen.getByText(`${fakeMovie.rating}/10.0`);
     expect(movieRaiting).toBeInTheDocument();
-    const movieIMG = document.querySelector('.movie-card img');
+    const movieIMG = screen.getByRole('img');
     expect(movieIMG).toBeInTheDocument();
   });
-})
+});
 
-describe("SnackBar", function() {
+describe('SnackBar', function () {
   test('SnackBar Tests', () => {
     const snackBarSampleData = { open: true, action: '' };
     // Accept
@@ -69,5 +69,5 @@ describe("SnackBar", function() {
     );
     const snackBarReject = screen.getByText('Rejected!');
     expect(snackBarReject).toBeInTheDocument();
-  })
+  });
 });

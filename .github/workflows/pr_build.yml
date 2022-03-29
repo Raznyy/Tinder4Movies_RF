@@ -27,6 +27,4 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-          repositorty-name: Raznyy/Tinder4Movies_RF
-          target-folder: public
           

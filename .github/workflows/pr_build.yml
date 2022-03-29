@@ -17,9 +17,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: node & npm init 
-        run: |
-          npm ci
+        run: npm ci
       - name: test & linter
         run: |
           CI=true npm run test
           npm run lint
+      - name: build & deploy to GitHub Pages
+        run: npm run deploy
+          

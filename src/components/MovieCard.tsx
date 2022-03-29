@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Movie } from '../types';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,8 +14,9 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 type MovieCardProps = {
   movieItem: Movie;
   position: number;
+  disabled: boolean;
 };
-export default function MovieCard({ movieItem, position }: MovieCardProps) {
+export default function MovieCard({ movieItem, position, disabled }: MovieCardProps) {
   const [rotation] = useState<number>(Math.floor(Math.random() * 6 - 3));
 
   function clickHandler(action: string) {
@@ -23,7 +24,10 @@ export default function MovieCard({ movieItem, position }: MovieCardProps) {
   }
 
   return (
-    <Card className={`movie-card`} sx={{ transform: `rotate(${rotation}deg)`, zIndex: `${position}` }}>
+    <Card
+      className={`movie-card`}
+      sx={{ transform: `rotate(${rotation}deg)`, zIndex: `${position}` }}
+    >
       <CardHeader
         title={<Typography variant="h6">{movieItem.title}</Typography>}
         subheader={
@@ -55,6 +59,7 @@ export default function MovieCard({ movieItem, position }: MovieCardProps) {
           color="success"
           startIcon={<CheckCircleRoundedIcon />}
           onClick={() => clickHandler('accept')}
+          disabled={disabled}
         >
           Accept
         </Button>
@@ -63,6 +68,7 @@ export default function MovieCard({ movieItem, position }: MovieCardProps) {
           color="error"
           endIcon={<CancelRoundedIcon />}
           onClick={() => clickHandler('reject')}
+          disabled={disabled}
         >
           Reject
         </Button>

@@ -21,7 +21,10 @@ function App() {
       {movies &&
         movies.map((movie, index) => {
           const position = movies.length - index;
-          return <MovieCard key={movie.id} movieItem={movie} position={position}/>;
+          const disabled = !(index === 0);
+          return (
+            <MovieCard key={movie.id} movieItem={movie} position={position} disabled={disabled}/>
+          );
         })}
     </div>
   );

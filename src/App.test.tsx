@@ -46,41 +46,44 @@ describe('MovieCard', function () {
     expect(movieRaiting).toBeInTheDocument();
     const movieIMG = screen.getByRole('img');
     expect(movieIMG).toBeInTheDocument();
-    const buttons = screen.getAllByRole('button')
+    const buttons = screen.getAllByRole('button');
     expect(buttons.length).toEqual(2);
   });
 });
 
 describe('Action Buttons', function () {
   test('Button Animation Accept', () => {
-      render(
-      <MovieCard 
+    const { container } = render(
+      <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
         position={1}
         disabled={false}
-        updateMovies={(action: string) => {}} />, container);
-  
-    fireEvent.click(screen.getByText('Accept'))
-  
-    const movieAnimationAccept = document.querySelector(".movie-card.movie-card--animate-accept")
-    expect(movieAnimationAccept).toBeInTheDocument();
-  })
-  
+        updateMovies={() => {}}
+      />
+    );
+    fireEvent.click(screen.getByText('Accept'));
+    expect(
+      container.getElementsByClassName('movie-card--animate-accept').length
+    ).toBe(1);
+  });
+
   test('Button Animation Reject', () => {
-      render(
-      <MovieCard 
+    const { container } = render(
+      <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
         position={1}
         disabled={false}
-        updateMovies={(action: string) => {}} />, container);
-  
-    fireEvent.click(screen.getByText('Reject'))
-  
-    const movieAnimationReject = document.querySelector(".movie-card.movie-card--animate-reject")
-    expect(movieAnimationReject).toBeInTheDocument();
-  })
+        updateMovies={() => {}}
+      />
+    );
+
+    fireEvent.click(screen.getByText('Reject'));
+    expect(
+      container.getElementsByClassName('movie-card--animate-reject').length
+    ).toBe(1);
+  });
 });
 
 describe('SnackBar', function () {

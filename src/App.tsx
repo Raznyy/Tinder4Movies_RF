@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Movie, SnackBarOptions } from './types';
-import MovieCard from './components/MovieCard';
+import React, { useState } from 'react';
+import {SnackBarOptions } from './types';
 import NotificationSnackBar from './components/NotificationSnackBar';
 import './App.css';
-import {moviesMock} from './mock-data/movies-mock';
+import MovieList from './components/MovieList';
+import { MovieDataProvider } from './context/MovieContext';
 
 function App() {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const [snackBarOptions, setSnackBarOptions] = useState<SnackBarOptions>({
     open: false,
     action: '',
   });
-  // Mocking the API with json-server
-  const mockedURL = 'http://localhost:3004/movies';
 
-  // Update movies array on single click (accept/reject)
   function updateMovies(id: string, action: string) {
-    setMovies((prevArray) => prevArray.filter((movie) => movie.id !== id));
-    sendEventToAPI(id, action);
     setSnackBarOptions({ open: true, action });
     // Hide snackbar after 1.5s
     setTimeout(() => {
@@ -25,57 +19,11 @@ function App() {
     }, 1500);
   }
 
-  const generateRequestBody = (id: string) =>
-    movies.find((movie) => movie.id === id);
-
-  // Send PUT request to API to update data
-  async function sendEventToAPI(id: string, action: string) {
-    const requestURL = `${mockedURL}/recommendations/${id}/${action}`;
-    const requestBody = { ...generateRequestBody(id), action };
-    await fetch(requestURL, {
-      method: 'PUT',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((response) => {
-        // Success
-      })
-      .catch((error) => {
-        // Error
-      });
-  }
-
-  // Get Movies from mocked REST API
-  useEffect(() => {
-    async function getMovies() {
-      const response = await fetch(mockedURL);
-      const data: Movie[] = await response.json();
-      setMovies(data);
-    }
-    getMovies().catch(() => {
-      // When server fails (Github Pages/ no json-server running) just get the mock data
-      setMovies(moviesMock.movies);
-    });
-  }, []);
-
   return (
     <div className="App">
-      {movies &&
-        movies.map((movie, index) => {
-          const position = movies.length - index;
-          const disabled = !(index === 0);
-          return (
-            <MovieCard
-              key={movie.id}
-              movieItem={movie}
-              position={position}
-              disabled={disabled}
-              updateMovies={(action: string) => updateMovies(movie.id, action)}
-            />
-          );
-        })}
+      <MovieDataProvider>
+        <MovieList />
+      </MovieDataProvider>
       <NotificationSnackBar snackBarOptions={snackBarOptions} />
     </div>
   );

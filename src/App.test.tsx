@@ -18,24 +18,20 @@ afterEach(() => {
 it('SnackBar Tests', () => {
   const snackBarSampleData = { open: true, action: '' };
   // Accept
-  act(() => {
-    snackBarSampleData.action = 'accept';
-    render(
-      <NotificationSnackBar snackBarOptions={snackBarSampleData} />,
-      container
-    );
-  });
+  snackBarSampleData.action = 'accept';
+  render(
+    <NotificationSnackBar snackBarOptions={snackBarSampleData} />,
+    container
+  );
   const snackBarAccept = screen.getByText('You liked the movie!');
   expect(snackBarAccept).toBeInTheDocument();
 
   // Reject
-  act(() => {
-    snackBarSampleData.action = 'reject';
-    render(
-      <NotificationSnackBar snackBarOptions={snackBarSampleData}/>, 
-      container
-    );
-  });
+  snackBarSampleData.action = 'reject';
+  render(
+    <NotificationSnackBar snackBarOptions={snackBarSampleData}/>, 
+    container
+  );
   const snackBarReject = screen.getByText("Rejected!");
   expect(snackBarReject).toBeInTheDocument();
 });

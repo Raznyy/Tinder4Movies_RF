@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 import NotificationSnackBar from './components/NotificationSnackBar';
 import MovieCard from './components/MovieCard';
@@ -52,37 +52,35 @@ describe('MovieCard', function () {
 });
 
 describe('Action Buttons', function () {
-  test('Button Animation Accept', () => {
-    const view = render(
+  test('Button Animation Accept', async () => {
+   const handleClick = jest.fn()
+    render(
       <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
         position={1}
         disabled={false}
-        updateMovies={() => {}}
-      />
+        updateMovies={() => handleClick()}
+      />, container
     );
     fireEvent.click(screen.getByText('Accept'));
-    expect(
-      view.container.getElementsByClassName('movie-card--animate-accept').length
-    ).toBe(1);
+    waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
   });
 
   test('Button Animation Reject', () => {
+    const handleClick = jest.fn()
     const view = render(
       <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
         position={1}
         disabled={false}
-        updateMovies={() => {}}
+        updateMovies={() => handleClick()}
       />
     );
 
     fireEvent.click(screen.getByText('Reject'));
-    expect(
-      view.container.getElementsByClassName('movie-card--animate-reject').length
-    ).toBe(1);
+    waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
   });
 });
 

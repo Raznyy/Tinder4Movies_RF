@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 import NotificationSnackBar from './components/NotificationSnackBar';
 
@@ -15,12 +15,27 @@ afterEach(() => {
   container = null;
 });
 
-it('SnackBar Sample Test', () => {
-  const snackBarSampleData = { open: true, action: 'accept' };
-  render(
-    <NotificationSnackBar snackBarOptions={snackBarSampleData} />,
-    container
-  );
+it('SnackBar Tests', () => {
+  const snackBarSampleData = { open: true, action: '' };
+  // Accept
+  act(() => {
+    snackBarSampleData.action = 'accept';
+    render(
+      <NotificationSnackBar snackBarOptions={snackBarSampleData} />,
+      container
+    );
+  });
   const snackBarAccept = screen.getByText('You liked the movie!');
   expect(snackBarAccept).toBeInTheDocument();
+
+  // Reject
+  act(() => {
+    snackBarSampleData.action = 'reject';
+    render(
+      <NotificationSnackBar snackBarOptions={snackBarSampleData}/>, 
+      container
+    );
+  });
+  const snackBarReject = screen.getByText("Rejected!");
+  expect(snackBarReject).toBeInTheDocument();
 });

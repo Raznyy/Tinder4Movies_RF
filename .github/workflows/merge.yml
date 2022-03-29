@@ -1,6 +1,9 @@
 name: Build and Test Tinder 4 Movies App
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build_test:
@@ -24,4 +27,13 @@ jobs:
         run: |
           CI=true npm run test
           npm run lint
+
+      - name: build
+        run: npm run build
+        
+      - name: deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
           

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Movie } from '../types';
+import { AnimateOptions, Movie } from '../types';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -23,21 +23,21 @@ export default function MovieCard({
   disabled,
   updateMovies,
 }: MovieCardProps) {
-  const [animate, setAnimate] = useState<boolean>(false);
+  const [animate, setAnimate] = useState<AnimateOptions>({animate: false, type: ''});
   const [rotation] = useState<number>(Math.floor(Math.random() * 6 - 3));
 
   function clickHandler(action: string) {
     // Toggle the animation
-    setAnimate((prevState) => !prevState);
+    setAnimate({animate: true, type: action });
     // Time it out to make some space for animation
     setTimeout(() => {
       updateMovies(action);
-    }, 300);
+    }, 700);
   }
 
   return (
     <Card
-      className={`movie-card ${animate ? 'movie-card--animate' : ''}`}
+      className={`movie-card ${animate.animate ? `movie-card--animate-${animate.type}` : ''}`}
       sx={{ transform: `rotate(${rotation}deg)`, zIndex: `${position}` }}
     >
       <CardHeader

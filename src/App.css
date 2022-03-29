@@ -28,35 +28,76 @@
     box-shadow: 0px 0px 15px 3px rgb(66 68 90 / 25%) !important;
 }
 
-.movie-card--animate {
-    -webkit-animation: puff-out-center 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-    animation: puff-out-center 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+.movie-card--animate-accept {
+    -webkit-animation: puff-out-accept 700ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation: puff-out-accept 700ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
 }
 
-@-webkit-keyframes puff-out-center {
+.movie-card--animate-reject {
+    -webkit-animation: puff-out-reject 700ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    animation: puff-out-reject 700ms cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+
+@-webkit-keyframes puff-out-accept {
     0% {
         -webkit-filter: blur(0px);
         filter: blur(0px);
         opacity: 1;
+        border: 0px solid #73E643;
     }
 
     100% {
         -webkit-filter: blur(4px);
         filter: blur(4px);
         opacity: 0;
+        border: 15px solid #73E643;
     }
 }
 
-@keyframes puff-out-center {
+@keyframes puff-out-accept {
     0% {
         -webkit-filter: blur(0px);
         filter: blur(0px);
         opacity: 1;
+        border: 0px solid #73E643;
     }
 
     100% {
         -webkit-filter: blur(4px);
         filter: blur(4px);
         opacity: 0;
+        border: 15px solid #73E643;
+    }
+}
+
+@-webkit-keyframes puff-out-reject {
+    0% {
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
+        border: 0px solid #F22233;
+    }
+
+    100% {
+        -webkit-filter: blur(4px);
+        filter: blur(4px);
+        opacity: 0;
+        border: 15px solid #F22233;
+    }
+}
+
+@keyframes puff-out-reject {
+    0% {
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
+        border: 0px solid #F22233;
+    }
+
+    100% {
+        -webkit-filter: blur(4px);
+        filter: blur(4px);
+        opacity: 0;
+        border: 15px solid #F22233;
     }
 }

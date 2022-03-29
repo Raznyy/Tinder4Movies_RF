@@ -11,3 +11,8 @@ export type SnackBarOptions = {
     open: boolean;
     action: string;
 }
+
+export type AnimateOptions = {
+    animate: boolean;
+    type: string;
+}

@@ -4,9 +4,11 @@ import Alert from '@mui/material/Alert';
 import { SnackBarOptions } from '../types';
 
 type SnackBarProps = {
-    snackBarOptions: SnackBarOptions;
-}
-export default function NotificationSnackBar({snackBarOptions}: SnackBarProps) {
+  snackBarOptions: SnackBarOptions;
+};
+export default function NotificationSnackBar({
+  snackBarOptions,
+}: SnackBarProps) {
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}

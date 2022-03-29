@@ -18,6 +18,10 @@ function App() {
     setMovies((prevArray) => prevArray.filter((movie) => movie.id !== id));
     sendEventToAPI(id, action);
     setSnackBarOptions({ open: true, action });
+    // Hide snackbar after 1.5s
+    setTimeout(() => {
+      setSnackBarOptions({ open: false, action });
+    }, 1500);
   }
 
   const generateRequestBody = (id: string) =>

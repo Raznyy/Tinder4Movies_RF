@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Tinder4Movies_RF/static/css/main.c8f23bdd.css",
-    "main.js": "/Tinder4Movies_RF/static/js/main.e2366f72.js",
+    "main.js": "/Tinder4Movies_RF/static/js/main.03959d5d.js",
     "static/js/787.74732064.chunk.js": "/Tinder4Movies_RF/static/js/787.74732064.chunk.js",
     "index.html": "/Tinder4Movies_RF/index.html",
     "main.c8f23bdd.css.map": "/Tinder4Movies_RF/static/css/main.c8f23bdd.css.map",
-    "main.e2366f72.js.map": "/Tinder4Movies_RF/static/js/main.e2366f72.js.map",
+    "main.03959d5d.js.map": "/Tinder4Movies_RF/static/js/main.03959d5d.js.map",
     "787.74732064.chunk.js.map": "/Tinder4Movies_RF/static/js/787.74732064.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c8f23bdd.css",
-    "static/js/main.e2366f72.js"
+    "static/js/main.03959d5d.js"
   ]
 }

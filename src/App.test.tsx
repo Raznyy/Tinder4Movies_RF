@@ -4,6 +4,6 @@ import App from './App';
 
 test('Random Test', () => {
   render(<App />);
-  const linkElement = document.querySelector("div");
+  const linkElement = screen.findByRole("div");
   expect(linkElement).toBeInTheDocument();
 });

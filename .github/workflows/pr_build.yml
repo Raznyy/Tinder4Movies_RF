@@ -1,0 +1,16 @@
+name: Build and Test Tinder 4 Movies App
+
+on: [push]
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: node & npm init 
+        run: |
+          nvm use
+          npm ci
+      - name: test & linter
+        run: |
+          npm run test
+          npm run linter

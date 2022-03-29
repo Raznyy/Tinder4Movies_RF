@@ -1,9 +1,26 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { unmountComponentAtNode } from 'react-dom';
+import NotificationSnackBar from './components/NotificationSnackBar';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+let container: any = null;
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it('SnackBar Sample Test', () => {
+  const snackBarSampleData = { open: true, action: 'accept' };
+  render(
+    <NotificationSnackBar snackBarOptions={snackBarSampleData} />,
+    container
+  );
+  const snackBarAccept = screen.getByText('You liked the movie!');
+  expect(snackBarAccept).toBeInTheDocument();
 });

@@ -19,7 +19,6 @@ jobs:
       - name: node & npm init 
         run: |
           npm ci
-          nvm use
       - name: test & linter
         run: |
           npm run test

@@ -64,10 +64,10 @@ describe('Action Buttons', function () {
       />, container
     );
     fireEvent.click(screen.getByText('Accept'));
-    waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
   });
 
-  test('Button Animation Reject', () => {
+  test('Button Animation Reject', async () => {
     const handleClick = jest.fn()
     render(
       <MovieCard
@@ -80,7 +80,7 @@ describe('Action Buttons', function () {
     );
 
     fireEvent.click(screen.getByText('Reject'));
-    waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(handleClick).toHaveBeenCalledTimes(1));
   });
 });
 

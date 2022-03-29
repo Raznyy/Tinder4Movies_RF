@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme, useThemeUpdate } from '../context/MovieContext';
 import MovieCard from './MovieCard';
 
-export default function MovieList() {
+export default function MovieList(props: { toggleSnackBar: Function }) {
   // Use the MovieContext to work with data
   const movies = useTheme();
   const updateMovies = useThemeUpdate();
@@ -19,7 +19,10 @@ export default function MovieList() {
               movieItem={movie}
               position={position}
               disabled={disabled}
-              updateMovies={(action: string) => updateMovies(movie.id, action)}
+              updateMovies={(action: string) => {
+                updateMovies(movie.id, action);
+                props.toggleSnackBar(action);
+              }}
             />
           );
         })}

@@ -11,18 +11,17 @@ function App() {
     action: '',
   });
 
-  function updateMovies(id: string, action: string) {
+  function toggleSnackBar(action: string) {
     setSnackBarOptions({ open: true, action });
-    // Hide snackbar after 1s
     setTimeout(() => {
       setSnackBarOptions({ open: false, action });
-    }, 1000);
+    }, 1000)
   }
 
   return (
     <div className="App">
       <MovieDataProvider>
-        <MovieList />
+        <MovieList toggleSnackBar={(action: string) => toggleSnackBar(action)} />
       </MovieDataProvider>
       <NotificationSnackBar snackBarOptions={snackBarOptions} />
     </div>

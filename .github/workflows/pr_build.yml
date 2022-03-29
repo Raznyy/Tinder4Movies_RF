@@ -23,5 +23,10 @@ jobs:
           CI=true npm run test
           npm run lint
       - name: build & deploy to GitHub Pages
-        run: npm run deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
+          repositorty-name: Raznyy/Tinder4Movies_RF
+          target-folder: public
           

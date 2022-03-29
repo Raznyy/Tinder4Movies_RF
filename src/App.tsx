@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Movie, SnackBarOptions } from './types';
 import MovieCard from './components/MovieCard';
-import './App.css';
 import NotificationSnackBar from './components/NotificationSnackBar';
+import './App.css';
+import {moviesMock} from './mock-data/movies-mock';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -53,7 +54,10 @@ function App() {
       const data: Movie[] = await response.json();
       setMovies(data);
     }
-    getMovies();
+    getMovies().catch(() => {
+      // When server fails (Github Pages/ no json-server running) just get the mock data
+      setMovies(moviesMock.movies);
+    });
   }, []);
 
   return (

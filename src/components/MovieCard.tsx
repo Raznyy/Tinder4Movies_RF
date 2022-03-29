@@ -1,4 +1,5 @@
 import React from 'react';
+import { Movie } from '../types';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -9,14 +10,14 @@ import Typography from '@mui/material/Typography';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
-export default function MovieCard() {
+export default function MovieCard(props: {movieItem: Movie}) {
   return (
     <Card className={`movie-card`}>
       <CardHeader
-        title={<Typography variant="h6">Sample Title</Typography>}
+        title={<Typography variant="h6">{props.movieItem.title}</Typography>}
         subheader={
           <Typography variant="subtitle2">
-            5.5/10{' '}
+            {props.movieItem.rating}/10.0
             <StarRateRoundedIcon
               fontSize="small"
               color="warning"
@@ -34,7 +35,7 @@ export default function MovieCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Some text xxdx dads ad sad asd asd sad asdsa
+          {props.movieItem.summary}
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>

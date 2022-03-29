@@ -3,10 +3,14 @@ import { moviesMock } from '../mock-data/movies-mock';
 import { Movie } from '../types';
 
 const MovieContext = createContext<Movie[] | null>([]);
+const MovieUpdateContext = createContext({} as any);
 
 // Function to provide the Movie Context anywhere in App
-export function useTheme(){
+export function useTheme() {
   return useContext(MovieContext);
+}
+export function useThemeUpdate() {
+  return useContext(MovieUpdateContext);
 }
 export function MovieDataProvider({ children }: any) {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -56,7 +60,9 @@ export function MovieDataProvider({ children }: any) {
 
   return (
     <MovieContext.Provider value={movies}>
-      {children}
+      <MovieUpdateContext.Provider value={updateMovies}>
+        {children}
+      </MovieUpdateContext.Provider>
     </MovieContext.Provider>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { MovieDataProvider } from './context/MovieContext';
 import {SnackBarOptions } from './types';
 import NotificationSnackBar from './components/NotificationSnackBar';
-import './App.css';
 import MovieList from './components/MovieList';
-import { MovieDataProvider } from './context/MovieContext';
+import './App.css';
 
 function App() {
   const [snackBarOptions, setSnackBarOptions] = useState<SnackBarOptions>({
@@ -13,10 +13,10 @@ function App() {
 
   function updateMovies(id: string, action: string) {
     setSnackBarOptions({ open: true, action });
-    // Hide snackbar after 1.5s
+    // Hide snackbar after 1s
     setTimeout(() => {
       setSnackBarOptions({ open: false, action });
-    }, 1500);
+    }, 1000);
   }
 
   return (

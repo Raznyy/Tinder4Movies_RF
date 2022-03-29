@@ -1,10 +1,12 @@
 import React from 'react';
-import { useTheme } from '../context/MovieContext';
+import { useTheme, useThemeUpdate } from '../context/MovieContext';
 import MovieCard from './MovieCard';
 
 export default function MovieList() {
+  // Use the MovieContext to work with data
   const movies = useTheme();
-  
+  const updateMovies = useThemeUpdate();
+
   return (
     <div className="movie-list">
       {movies &&
@@ -17,7 +19,7 @@ export default function MovieList() {
               movieItem={movie}
               position={position}
               disabled={disabled}
-              updateMovies={(action: string) => {}}
+              updateMovies={(action: string) => updateMovies(movie.id, action)}
             />
           );
         })}

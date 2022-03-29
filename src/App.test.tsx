@@ -69,14 +69,14 @@ describe('Action Buttons', function () {
 
   test('Button Animation Reject', () => {
     const handleClick = jest.fn()
-    const view = render(
+    render(
       <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
         position={1}
         disabled={false}
         updateMovies={() => handleClick()}
-      />
+      />, container
     );
 
     fireEvent.click(screen.getByText('Reject'));

@@ -10,14 +10,18 @@ import Typography from '@mui/material/Typography';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
-export default function MovieCard(props: {movieItem: Movie}) {
+
+type MovieCardProps = {
+    movieItem: Movie;
+}
+export default function MovieCard({movieItem}: MovieCardProps) {
   return (
     <Card className={`movie-card`}>
       <CardHeader
-        title={<Typography variant="h6">{props.movieItem.title}</Typography>}
+        title={<Typography variant="h6">{movieItem.title}</Typography>}
         subheader={
           <Typography variant="subtitle2">
-            {props.movieItem.rating}/10.0
+            {movieItem.rating}/10.0
             <StarRateRoundedIcon
               fontSize="small"
               color="warning"
@@ -29,13 +33,13 @@ export default function MovieCard(props: {movieItem: Movie}) {
       />
       <CardMedia
         component="img"
-        alt="test"
+        alt={movieItem.title}
         height="auto"
-        image="https://images-na.ssl-images-amazon.com/images/M/MV5BMTUzNTE2NTkzMV5BMl5BanBnXkFtZTgwMDAzOTUyMDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg"
+        image={movieItem.imageURL}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {props.movieItem.summary}
+          {movieItem.summary}
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>

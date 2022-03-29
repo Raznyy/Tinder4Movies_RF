@@ -53,7 +53,7 @@ describe('MovieCard', function () {
 
 describe('Action Buttons', function () {
   test('Button Animation Accept', () => {
-    const { container } = render(
+    const view = render(
       <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
@@ -64,12 +64,12 @@ describe('Action Buttons', function () {
     );
     fireEvent.click(screen.getByText('Accept'));
     expect(
-      container.getElementsByClassName('movie-card--animate-accept').length
+      view.container.getElementsByClassName('movie-card--animate-accept').length
     ).toBe(1);
   });
 
   test('Button Animation Reject', () => {
-    const { container } = render(
+    const view = render(
       <MovieCard
         key={fakeMovie.id}
         movieItem={fakeMovie}
@@ -81,7 +81,7 @@ describe('Action Buttons', function () {
 
     fireEvent.click(screen.getByText('Reject'));
     expect(
-      container.getElementsByClassName('movie-card--animate-reject').length
+      view.container.getElementsByClassName('movie-card--animate-reject').length
     ).toBe(1);
   });
 });

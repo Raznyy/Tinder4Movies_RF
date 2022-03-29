@@ -15,17 +15,29 @@ type MovieCardProps = {
   movieItem: Movie;
   position: number;
   disabled: boolean;
+  updateMovies: Function;
 };
-export default function MovieCard({ movieItem, position, disabled }: MovieCardProps) {
+export default function MovieCard({
+  movieItem,
+  position,
+  disabled,
+  updateMovies,
+}: MovieCardProps) {
+  const [animate, setAnimate] = useState<boolean>(false);
   const [rotation] = useState<number>(Math.floor(Math.random() * 6 - 3));
 
   function clickHandler(action: string) {
-    console.log({ action });
+    // Toggle the animation
+    setAnimate((prevState) => !prevState);
+    // Time it out to make some space for animation
+    setTimeout(() => {
+      updateMovies(action);
+    }, 300);
   }
 
   return (
     <Card
-      className={`movie-card`}
+      className={`movie-card ${animate ? 'movie-card--animate' : ''}`}
       sx={{ transform: `rotate(${rotation}deg)`, zIndex: `${position}` }}
     >
       <CardHeader

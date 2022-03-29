@@ -5,8 +5,16 @@ import './App.css';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  // Mocking the API with json-server
   const mockedURL = 'http://localhost:3004/movies';
 
+  // Update movies array on single click (accept/reject)
+  // Send event to API with PUT request to update the record
+  function updateMovies(id: string, action: string) {
+    setMovies((prevArray) => prevArray.filter((movie) => movie.id !== id));
+  }
+
+  // Get Movies from mocked REST API
   useEffect(() => {
     async function getMovies() {
       const response = await fetch(mockedURL);
@@ -23,7 +31,13 @@ function App() {
           const position = movies.length - index;
           const disabled = !(index === 0);
           return (
-            <MovieCard key={movie.id} movieItem={movie} position={position} disabled={disabled}/>
+            <MovieCard
+              key={movie.id}
+              movieItem={movie}
+              position={position}
+              disabled={disabled}
+              updateMovies={(action: string) => updateMovies(movie.id, action)}
+            />
           );
         })}
     </div>
